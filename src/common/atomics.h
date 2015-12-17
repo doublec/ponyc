@@ -23,10 +23,11 @@
     #else
       #define __SYNC_ATOMICS
     #endif
-  #elif __GNUC_PREREQ(4, 7)
-    #define __GNUC_ATOMICS
+//  #elif __GNUC_PREREQ(4, 7)
+//    #define __GNUC_ATOMICS
   #elif defined(__GNUC__)
-    #define __SYNC_ATOMICS
+//    #define __SYNC_ATOMICS
+    #define __GNUC_ATOMICS
   #else
     #error "Please use clang >= 3.5 or gcc >= 4.7"
   #endif

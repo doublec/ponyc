@@ -9,6 +9,11 @@
 #include <sys/mman.h>
 #endif
 
+#if defined(__ANDROID__)
+#include <sys/mman.h>
+#endif
+
+
 #if defined(PLATFORM_IS_MACOSX)
 #include <mach/vm_statistics.h>
 #endif
@@ -19,7 +24,7 @@ void* virtual_alloc(size_t bytes)
 
 #if defined(PLATFORM_IS_WINDOWS)
   p = VirtualAlloc(NULL, bytes, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
-#elif defined(PLATFORM_IS_POSIX_BASED)
+#elif defined(PLATFORM_IS_POSIX_BASED) || defined(__ANDROID__)
 #if defined(PLATFORM_IS_LINUX)
   p = mmap(0, bytes, PROT_READ | PROT_WRITE,
     MAP_PRIVATE | MAP_ANONYMOUS | MAP_NORESERVE, -1, 0);
@@ -45,7 +50,7 @@ void virtual_free(void* p, size_t bytes)
 {
 #if defined(PLATFORM_IS_WINDOWS)
   VirtualFree(p, 0, MEM_RELEASE);
-#elif defined(PLATFORM_IS_POSIX_BASED)
+#elif defined(PLATFORM_IS_POSIX_BASED) || defined(__ANDROID__)
   munmap(p, bytes);
 #endif
 }

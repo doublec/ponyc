@@ -771,6 +771,8 @@ void os_std_write(FILE* fp, char* buffer, size_t len)
   if(len > last)
     fwrite(&buffer[last], len - last, 1, fp);
 
+#elif defined(__ANDROID__)
+  fwrite(buffer, len, 1, fp);
 #elif defined PLATFORM_IS_LINUX
   fwrite_unlocked(buffer, len, 1, fp);
 #else

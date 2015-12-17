@@ -14,6 +14,8 @@ PONY_EXTERN_C_BEGIN
 
 #ifdef PLATFORM_IS_POSIX_BASED
 typedef struct _Unwind_Context exception_context_t;
+#elif defined(__ANDROID__)
+typedef struct _Unwind_Context exception_context_t;
 #elif defined(PLATFORM_IS_VISUAL_STUDIO)
 typedef DISPATCHER_CONTEXT exception_context_t;
 #endif

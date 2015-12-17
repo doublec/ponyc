@@ -150,7 +150,7 @@ bool pony_thread_create(pony_thread_id_t* thread, thread_fn start,
     return false;
 
   *thread = (HANDLE)p;
-#elif defined(PLATFORM_IS_LINUX) || defined(PLATFORM_IS_FREEBSD)
+#elif (defined(PLATFORM_IS_LINUX) || defined(PLATFORM_IS_FREEBSD)) && !defined(__ANDROID__)
   pthread_attr_t attr;
   pthread_attr_init(&attr);
 

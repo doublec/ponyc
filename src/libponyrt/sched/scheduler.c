@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <assert.h>
 
+#undef SCHED_BATCH
 #define SCHED_BATCH 100
 
 static DECLARE_THREAD_FN(run_thread);

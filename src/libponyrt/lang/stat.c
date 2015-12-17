@@ -3,6 +3,10 @@
 #include "lang.h"
 #include <stdio.h>
 
+#if defined(__ANDROID__)
+#define PLATFORM_IS_POSIX_BASED 1
+#endif
+
 PONY_EXTERN_C_BEGIN
 
 typedef struct pony_mode_t
@@ -32,7 +36,7 @@ typedef struct pony_stat_t
   uint32_t hard_links;
   uint32_t uid;
   uint32_t gid;
-  size_t size;
+  uint64_t size;
   int64_t access_time;
   int64_t access_time_nsec;
   int64_t modified_time;
@@ -135,7 +139,7 @@ static void unix_stat(pony_stat_t* p, struct stat* st)
   p->modified_time = st->st_mtime;
   p->change_time = st->st_ctime;
 
-#if defined(PLATFORM_IS_LINUX)
+#if defined(PLATFORM_IS_LINUX) && !defined(__ANDROID__)
   p->access_time_nsec = st->st_atim.tv_nsec;
   p->modified_time_nsec = st->st_mtim.tv_nsec;
   p->change_time_nsec = st->st_ctim.tv_nsec;

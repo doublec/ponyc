@@ -6,7 +6,7 @@
 /** Multithreading support.
  *
  */
-#ifdef PLATFORM_IS_POSIX_BASED
+#if 1 //def PLATFORM_IS_POSIX_BASED
 #  include <pthread.h>
 #  define pony_thread_id_t pthread_t
 

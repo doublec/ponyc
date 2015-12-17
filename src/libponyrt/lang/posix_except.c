@@ -1,5 +1,9 @@
 #include <platform.h>
 
+#if defined(__ANDROID__)
+#define PLATFORM_IS_POSIX_BASED
+#endif
+
 #ifdef PLATFORM_IS_POSIX_BASED
 
 #include "lsda.h"

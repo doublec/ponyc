@@ -5,7 +5,7 @@
 
 #if defined(PLATFORM_IS_WINDOWS)
 #include <direct.h>
-#elif defined(PLATFORM_IS_POSIX_BASED)
+#elif defined(PLATFORM_IS_POSIX_BASED) || defined(__ANDROID__)
 #include <unistd.h>
 #include <stdio.h>
 #endif
@@ -68,7 +68,7 @@ const char* windows_readdir(WIN32_FIND_DATA* find)
 
 #endif
 
-#if defined(PLATFORM_IS_POSIX_BASED)
+#if defined(PLATFORM_IS_POSIX_BASED) || defined(__ANDROID__)
 
 int o_rdonly()
 {

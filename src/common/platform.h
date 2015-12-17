@@ -91,11 +91,11 @@
 #  error PLATFORM NOT SUPPORTED!
 #endif
 
-#if defined(PLATFORM_IS_MACOSX) || defined(PLATFORM_IS_LINUX) || defined (PLATFORM_IS_FREEBSD)
+#if (defined(PLATFORM_IS_MACOSX) || defined(PLATFORM_IS_LINUX) || defined (PLATFORM_IS_FREEBSD)) && !defined(__ANDROID__)
 #  define PLATFORM_IS_POSIX_BASED
 #endif
 
-#if defined(PLATFORM_IS_POSIX_BASED) || defined(__MINGW64__)
+#if defined(PLATFORM_IS_POSIX_BASED) || defined(__MINGW64__) || defined(__ANDROID__)
 #  define PLATFORM_IS_CLANG_OR_GCC
 #endif
 

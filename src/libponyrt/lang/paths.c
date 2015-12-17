@@ -13,7 +13,7 @@ char* os_realpath(const char* path)
   if(GetFullPathName(path, FILENAME_MAX, resolved, NULL) == 0 ||
     GetFileAttributes(resolved) == INVALID_FILE_ATTRIBUTES)
     return NULL;
-#elif defined(PLATFORM_IS_POSIX_BASED)
+#elif defined(PLATFORM_IS_POSIX_BASED) || defined(__ANDROID__)
   char resolved[PATH_MAX];
 
   if(realpath(path, resolved) == NULL)
