@@ -66,16 +66,18 @@ prefix ?= /usr/local
 destdir ?= $(prefix)/lib/pony/$(tag)
 
 LIB_EXT ?= a
-BUILD_FLAGS = -march=$(arch) -Werror -Wconversion \
+BUILD_FLAGS = -m32 -march=$(arch) -Werror -Wconversion \
   -Wno-sign-conversion -Wextra -Wall
 LINKER_FLAGS = -march=$(arch)
 AR_FLAGS =
-ALL_CFLAGS = -std=gnu11 -fexceptions \
+ALL_CFLAGS = -m32 -std=gnu11 -fexceptions \
   -DPONY_VERSION=\"$(tag)\" -DPONY_COMPILER=\"$(CC)\" -DPONY_ARCH=\"$(arch)\"
-ALL_CXXFLAGS = -std=gnu++11 -fno-rtti
+ALL_CXXFLAGS = -m32 -std=gnu++11 -fno-rtti
 
 # Determine pointer size in bits.
-BITS := $(shell getconf LONG_BIT)
+#BITS := $(shell getconf LONG_BIT)
+BITS := 32
+
 
 ifeq ($(BITS),64)
 	BUILD_FLAGS += -mcx16
