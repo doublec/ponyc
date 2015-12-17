@@ -11,7 +11,7 @@ else
     lto := no
 
     ifneq (,$(shell which gcc-ar 2> /dev/null))
-      AR = gcc-ar
+      AR = arm-linux-androideabi-ar
       lto := yes
     endif
 
@@ -66,7 +66,7 @@ prefix ?= /usr/local
 destdir ?= $(prefix)/lib/pony/$(tag)
 
 LIB_EXT ?= a
-BUILD_FLAGS = -march=$(arch) -Werror -Wconversion \
+BUILD_FLAGS = -Werror -Wconversion \
   -Wno-sign-conversion -Wextra -Wall
 LINKER_FLAGS = -march=$(arch)
 AR_FLAGS =
@@ -75,7 +75,8 @@ ALL_CFLAGS = -std=gnu11 -fexceptions \
 ALL_CXXFLAGS = -std=gnu++11 -fno-rtti
 
 # Determine pointer size in bits.
-BITS := $(shell getconf LONG_BIT)
+BITS := 32 
+#$(shell getconf LONG_BIT)
 
 ifeq ($(BITS),64)
 	BUILD_FLAGS += -mcx16
